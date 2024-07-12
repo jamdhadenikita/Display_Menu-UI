@@ -103,3 +103,7 @@ button[type=submit]:hover {
         padding: 10px;
     }
 }
+
+.center-swal{
+    margin: auto;
+}
