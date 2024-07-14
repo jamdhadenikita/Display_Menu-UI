@@ -1,20 +1,36 @@
 
-//----------booking js --------------//
+// registration front end and backend connection using javascript
 
-// user.js
-async function addRegistration() {
-    const firstName = document.getElementById("fn").value;
-    const lastName = document.getElementById("ln").value;
-    const email = document.getElementById("em").value;
-    const mobile = document.getElementById("mb").value;
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('registrationForm').addEventListener('submit', addRegistration);
+});
+
+async function addRegistration(event) {
+    event.preventDefault(); // Prevent the form from submitting the traditional way
+
+    const firstName = document.getElementById("fn").value.trim();
+    const lastName = document.getElementById("ln").value.trim();
+    const email = document.getElementById("em").value.trim();
+    const mobile = document.getElementById("mb").value.trim();
     const gender = document.getElementById("gen").value;
-    const dateOfBirth = document.getElementById("dob").value;
-    const address = document.getElementById("add").value;
-    const city = document.getElementById("city").value;
-    const state = document.getElementById("state").value;
-    const areaPIN = document.getElementById("ap").value;
-    const password = document.getElementById("pass").value;
-    const confirmPassword = document.getElementById("cpass").value;
+    const dateOfBirth = document.getElementById("dob").value.trim();
+    const address = document.getElementById("add").value.trim();
+    const city = document.getElementById("city").value.trim();
+    const state = document.getElementById("state").value.trim();
+    const areaPIN = document.getElementById("ap").value.trim();
+    const password = document.getElementById("pass").value.trim();
+    const confirmPassword = document.getElementById("cpass").value.trim();
+
+    // Client-side validation
+    if (!firstName || !lastName || !email || !mobile || !gender || !dateOfBirth || !address || !city || !state || !areaPIN || !password || !confirmPassword) {
+        alert("All fields are required.");
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+    }
 
     const userData = {
         firstName: firstName,
@@ -34,10 +50,11 @@ async function addRegistration() {
     const url = "http://localhost:8080/api/registrations/saveInfo";
     
     try {
+        console.log("Sending data:", userData);  // Log the data being sent
         const response = await fetch(url, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json; charset=UTF-8'
             },
             body: JSON.stringify(userData)
         });
@@ -47,13 +64,66 @@ async function addRegistration() {
         }
 
         const finalData = await response.json();
-        console.log(finalData);
+        console.log("Received response:", finalData);  // Log the response
+
+        // Show success alert
+        await Swal.fire({
+            icon: 'success',
+            title: 'Registration Successful',
+            text: 'Your registration has been done successfully!',
+            confirmButtonText: 'OK'
+        });
     } catch (error) {
         console.error('Error:', error);
+        await Swal.fire({
+            icon: 'error',
+            title: 'Registration Failed',
+            text: 'There was an error during registration. Please try again.',
+            confirmButtonText: 'OK'
+        });
     }
 }
 
+///////////////login front end and backend connection using javascript
 
+//////////// update food menu
+$(document).ready(function(){
+    $("form").on("submit", function(event){
+        event.preventDefault();
+
+        // Gather form data
+        var formData = new FormData(this);
+        
+        // Make an AJAX request
+        $.ajax({
+            url: "http://localhost:8080/api/addfood/saveFood", // Replace with your server endpoint
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false, // Important for file upload
+            success: function(response){
+                // Handle the response from the server
+                $("#reg-response").text("Food details added successfully!");
+            },
+            error: function(xhr, status, error){
+                // Handle errors
+                $("#reg-response").text("An error occurred while adding food details.");
+     
+             }
+        });
+    });
+    
+    // Close button functionality
+    $(".close-button").on("click", function(){
+        // Reset the form
+        $("form")[0].reset();
+        // Clear the response message
+        $("#reg-response").text("");
+    });
+});
+
+
+/////////////////////////////////////////////////////////////////
 // document.addEventListener("DOMContentLoaded", function() {
 //     const form = document.getElementById("registrationForm");
 
