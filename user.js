@@ -115,6 +115,7 @@ async function updateMenu(event) {
 
         if (response.ok) {
             const finalData = await response.json();
+            console.log(finalData);
             Swal.fire({
                 icon: 'success',
                 title: 'Success!',
