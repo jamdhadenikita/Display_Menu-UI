@@ -1,12 +1,12 @@
 
 // registration front end and backend connection using javascript
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('registrationForm').addEventListener('submit', addRegistration);
-});
+// document.addEventListener('DOMContentLoaded', function() {
+//     document.getElementById('registrationForm').addEventListener('submit', addRegistration);
+// });
 
 async function addRegistration(event) {
-    event.preventDefault(); // Prevent the form from submitting the traditional way
+    event.preventDefault();              // Prevent the form from submitting the traditional way
 
     const firstName = document.getElementById("fn").value.trim();
     const lastName = document.getElementById("ln").value.trim();
@@ -84,129 +84,57 @@ async function addRegistration(event) {
     }
 }
 
-///////////////login front end and backend connection using javascript
+///////////////login front end and backend connection using javascript///////////////
 
-//////////// update food menu
-$(document).ready(function(){
-    $("form").on("submit", function(event){
-        event.preventDefault();
 
-        // Gather form data
-        var formData = new FormData(this);
-        
-        // Make an AJAX request
-        $.ajax({
-            url: "http://localhost:8080/api/addfood/saveFood", // Replace with your server endpoint
-            type: "POST",
-            data: formData,
-            processData: false,
-            contentType: false, // Important for file upload
-            success: function(response){
-                // Handle the response from the server
-                $("#reg-response").text("Food details added successfully!");
-            },
-            error: function(xhr, status, error){
-                // Handle errors
-                $("#reg-response").text("An error occurred while adding food details.");
-     
-             }
+
+// ///////////////////// update food menu///////////////////////////////
+
+
+async function updateMenu(event) {
+    event.preventDefault(); // Prevent the form from submitting the traditional way
+
+    const title = document.getElementById("foodTitle").value.trim();
+    const description = document.getElementById("foodDescription").value.trim();
+    const price = document.getElementById("foodPrice").value.trim();
+    const image = document.getElementById("foodImage").files[0];
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('price', price);
+    formData.append('image', image);
+
+    const url = 'http://localhost:8080/api/addfood/saveFood';
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            body: formData
         });
-    });
-    
-    // Close button functionality
-    $(".close-button").on("click", function(){
-        // Reset the form
-        $("form")[0].reset();
-        // Clear the response message
-        $("#reg-response").text("");
-    });
-});
 
+        if (response.ok) {
+            const finalData = await response.json();
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Food added successfully!',
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: 'Failed to add food.',
+            });
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'An error occurred.',
+        });
+    }
+}
 
-/////////////////////////////////////////////////////////////////
-// document.addEventListener("DOMContentLoaded", function() {
-//     const form = document.getElementById("registrationForm");
-
-//     if (form) {
-//         form.addEventListener("submit", function(event) {
-//             event.preventDefault(); // Prevent the form from submitting the traditional way
-
-//             // Validate form before submission
-//             if (validateForm()) {
-//                 const formData = {
-//                     firstName: document.getElementById("fn").value,
-//                     lastName: document.getElementById("ln").value,
-//                     email: document.getElementById("em").value,
-//                     mobile: document.getElementById("mb").value,
-//                     gender: document.getElementById("gen").value,
-//                     dateOfBirth: document.getElementById("dob").value,
-//                     address: document.getElementById("add").value,
-//                     city: document.getElementById("city").value,
-//                     state: document.getElementById("state").value,
-//                     areaPIN: document.getElementById("ap").value,
-//                     password: document.getElementById("pass").value,
-//                     confirmPassword: document.getElementById("cpass").value
-//                 };
-
-//                 // Make the POST request
-//                 fetch("http://localhost:8080/api/registrations/saveInfo", {
-//                     method: "POST",
-//                     headers: {
-//                         "Content-Type": "application/json"
-//                     },
-//                     body: JSON.stringify(formData)
-//                 })
-//                 .then(response => {
-//                     if (response.ok) {
-//                         console.log("response gotted!!")
-//                         return response.json();
-//                     } 
-//                     else {
-//                         throw new Error('Failed to submit form');
-//                     }
-//                 })
-//                 .then(data => {
-//                     console.log("Success:", data);
-//                     Swal.fire({
-//                         text: "Form submitted successfully!",
-//                         duration: 3000, // Duration in milliseconds
-//                         gravity: "bottom", // 'top' or 'bottom'
-//                         position: "right", // 'left', 'center' or 'right'
-//                         backgroundColor: "green",
-//                         stopOnFocus: true, // Prevents dismissing of toast on hover/focus
-//                     });
-//                     // Optionally, you can clear the form or redirect the user
-//                     // document.getElementById("registrationForm").reset();
-//                 })
-//                 .catch(error => {
-//                     console.error("Error:", error);
-//                     alert("Registration failed. Please try again.");
-//                     Swal.fire({
-//                         text: "Form Not submitted !",
-//                         duration: 3000, // Duration in milliseconds
-//                         gravity: "bottom", // 'top' or 'bottom'
-//                         position: "right", // 'left', 'center' or 'right'
-//                         backgroundColor: "green",
-//                         stopOnFocus: true, // Prevents dismissing of toast on hover/focus
-//                     });
-//                 });
-//             }
-//         });
-//     } else {
-//         console.error("Form element not found.");
-//     }
-// });
-
-// function validateForm() {
-//     const password = document.getElementById("pass").value;
-//     const confirmPassword = document.getElementById("cpass").value;
-    
-//     if (password !== confirmPassword) {
-//         alert("Passwords do not match.");
-//         return false;
-//     }
-
-//     return true;
-// }
-
-
+document.querySelector("form").addEventListener("submit", updateMenu);
