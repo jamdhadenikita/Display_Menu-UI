@@ -80,8 +80,22 @@
     border-radius: 2px;
 }
 
+/* addmin side  */
+#navback{
+    background-color: rgba(15, 23, 43, .9);
+    /* border: 2px solid black; */
+    margin-top: 10px;
+    height: 80px;
+}
 
+#uesr{
+    margin-top: 20px;
+}
+.img{
+    margin-top: 20px;
+}
 /*** Navbar ***/
+
 .navbar-dark .navbar-nav .nav-link {
     position: relative;
     margin-left: 25px;

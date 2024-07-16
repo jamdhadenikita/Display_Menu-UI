@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="Dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    <div class="wrapper">
+        <header>
+            <h1>Welcome, <span id="usernameDisplay"></span></h1>
+            <img id="userImage" src="" alt="User Image" width="100" height="100">
+        </header>
+        <nav>
+            <button onclick="addMenu()">Add Menu</button>
+            <button onclick="updateMenu()">Update Menu</button>
+            <button onclick="logout()">Logout</button>
+        </nav>
+
+        <div id="menuOptions" class="menu-options">
+            <h2>Your Menu Options</h2>
+            <div id="menuContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        // Mock user data (this should come from your authentication response)
+        const userData = {
+            username: "JohnDoe",
+            image: "path/to/user/image.jpg" // Replace with actual image path
+        };
+
+        // Display user info
+        document.getElementById("usernameDisplay").innerText = userData.username;
+        document.getElementById("userImage").src = userData.image;
+
+        // Mock menu data (replace with actual API call)
+        let menuData = [];
+
+        // Function to add menu
+        function addMenu() {
+            Swal.fire({
+                title: 'Add Menu',
+                html: `<input type="text" id="foodTitle" placeholder="Food Title" class="swal2-input">
+                       <input type="text" id="foodDescription" placeholder="Description" class="swal2-input">
+                       <input type="number" id="foodPrice" placeholder="Price" class="swal2-input">
+                       <input type="file" id="foodImage" class="swal2-input">`,
+                focusConfirm: false,
+                preConfirm: () => {
+                    const title = document.getElementById("foodTitle").value;
+                    const description = document.getElementById("foodDescription").value;
+                    const price = document.getElementById("foodPrice").value;
+                    const image = document.getElementById("foodImage").files[0];
+
+                    // Add menu item to mock data
+                    const newMenuItem = { title, description, price, image };
+                    menuData.push(newMenuItem);
+                    displayMenu();
+
+                    Swal.fire('Menu added!', '', 'success');
+                }
+            });
+        }
+
+        // Function to display menu
+        function displayMenu() {
+            const menuContainer = document.getElementById("menuContainer");
+            menuContainer.innerHTML = ''; // Clear existing menu
+
+            menuData.forEach((item, index) => {
+                const menuItemDiv = document.createElement("div");
+                menuItemDiv.className = "menu-item";
+                menuItemDiv.innerHTML = `
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    <p>Price: $${item.price}</p>
+                    <button onclick="deleteMenu(${index})">Delete</button>
+                `;
+                menuContainer.appendChild(menuItemDiv);
+            });
+        }
+
+        // Function to delete menu
+        function deleteMenu(index) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to recover this menu!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    menuData.splice(index, 1); // Remove menu item
+                    displayMenu();
+                    Swal.fire('Deleted!', 'Your menu has been deleted.', 'success');
+                }
+            });
+        }
+
+        // Function to update menu
+        function updateMenu() {
+            Swal.fire("Update Menu feature is under development.");
+        }
+
+        // Function to logout
+        function logout() {
+            alert("Logging out...");
+            // Redirect to login page
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>
