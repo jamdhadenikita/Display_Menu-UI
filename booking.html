@@ -8,6 +8,7 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" />
     
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -104,7 +105,7 @@
                     <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
                         <h5 class="section-title ff-secondary text-start text-primary fw-normal">Reservation</h5>
                         <h1 class="text-white mb-4">Book A Table Online</h1>
-                        <form id="bookingForm">
+                        <!-- <form id="bookingForm">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-floating">
@@ -112,45 +113,45 @@
                                         <label for="name">Your Name</label>
                                     </div>
                                 </div>
-
+                        
                                 <div class="col-md-6">
                                     <div class="form-floating">
                                         <input type="email" class="form-control" id="email" placeholder="Your Email">
                                         <label for="email">Your Email</label>
                                     </div>
                                 </div>
-
+                        
                                 <div class="col-md-6">
                                     <div class="form-floating date" id="date3" data-target-input="nearest">
                                         <input type="text" class="form-control datetimepicker-input" id="datetime" placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker" />
                                         <label for="datetime">Date & Time</label>
                                     </div>
                                 </div>
-
+                        
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="number" class="form-control" id="numberofpeple" placeholder="Number of People">
-                                        <label for="numberofpeple">Number of People</label>
+                                        <input type="text" class="form-control" id="numberofpeople" placeholder="Number of People">
+                                        <label for="numberofpeople">Number of People</label>
                                     </div>
                                 </div>
-
+                        
                                 <div class="col-12">
                                     <div class="form-floating">
                                         <textarea class="form-control" placeholder="Special Request" id="message" style="height: 100px"></textarea>
                                         <label for="message">Special Request</label>
                                     </div>
                                 </div>
-
+                        
                                 <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Book Now</button>
+                                    <button class="btn btn-primary w-100 py-3" onclick="BookingForm()">Book Now</button>
                                 </div>
-
                             </div>
                         </form>
+                        <div id="dt"></div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -256,7 +257,11 @@
      
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js" nonce="12345"></script>
     <script src="js/main.js"></script>
-    <script src="user.js" defer nonce="12345"></script>
+    <script src="./user.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>
+    
 
 </body>
 
