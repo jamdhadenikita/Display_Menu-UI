@@ -7,6 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+    <link rel="stylesheet" href="./table-styles.css">
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -51,7 +52,6 @@
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
                     <a href="" class="navbar-brand p-0">
                         <h1 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>" अन्नपूर्णा "</h1>
-                        <!-- <img src="img/logo.png" alt="Logo"> -->
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarCollapse">
@@ -59,30 +59,48 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto py-0 pe-4">
-                            <a href="" class="nav-item nav-link ">Admin Page</a><br>
+                            <a href="" class="nav-item nav-link">Admin Page</a>
                             <div class="img">
-                            <img src="https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Picture.png" height="50px" width="50px" alt="">
+                                <img src="https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Picture.png"
+                                    height="50px" width="50px" alt="">
                             </div>
-                            <!-- <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categories</a>
-                                <div class="dropdown-menu m-0">
-                                    <a href="updatefood.html" class="dropdown-item">update menu</a>
-                                </div>
-                            </div> -->
-                            <!-- <a href="./about.html" class="nav-item nav-link">About</a>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a> -->
                         </div>
                         <a href="" class="btn btn-primary py-2 px-4">Logout</a>
                     </div>
                 </nav>
             </div>
-            <div id="uesr">
-            <a href="" class="btn btn-primary py-2 px-4">User's</a>
-           </div>
+            <div id="user">
+                <button class="btn btn-primary py-2 px-4" id="fetchUsersBtn">User's</button>
+                
+            </div>
+        </div>
+
+        <!-- users list -->
+        
+        <div class="table-div" id="userTableContainer" style="display: none;">
+            <table id="userTable">
+                <thead>
+                    <h3>List of All Registered Users!</h3>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Gender</th>
+                        <th>Date of Birth</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>Area PIN</th>
+                        <th>State</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic content will be inserted here -->
+                </tbody>
+            </table>
         </div>
         <!-- Navbar & Hero End -->
-
-
 
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -98,6 +116,78 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+
+        <!-- Custom JavaScript -->
+        <script src="./user.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const fetchUsersBtn = document.getElementById('fetchUsersBtn');
+                const userTableContainer = document.getElementById('userTableContainer');
+            
+                fetchUsersBtn.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    
+                    if (userTableContainer.style.display === 'none') {
+                        fetchUsers();  // Fetch users only when showing the table
+                        userTableContainer.style.display = 'block';
+                    } else {
+                        userTableContainer.style.display = 'none';
+                    }
+                });
+            });
+            
+            async function fetchUsers() {
+                const url = 'http://localhost:8080/api/registrations/getallregisteruser'; // Update this if needed
+            
+                try {
+                    const response = await fetch(url, { method: 'GET' });
+                    if (response.ok) {
+                        const users = await response.json();
+                        const tbody = document.querySelector('#userTable tbody');
+                        tbody.innerHTML = '';
+            
+                        users.forEach(user => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${user.firstName}</td>
+                                <td>${user.lastName}</td>
+                                <td>${user.email}</td>
+                                <td>${user.mobile}</td>
+                                <td>${user.gender}</td>
+                                <td>${user.dateOfBirth}</td>
+                                <td>${user.address}</td>
+                                <td>${user.city}</td>
+                                <td>${user.areaPIN}</td>
+                                <td>${user.state}</td>
+                                <td>
+                                    <button class="delete-btn" onclick="deleteUser('${user.id}')">Delete</button>
+                                </td>
+                            `;
+                            tbody.appendChild(row);
+                        });
+                    } else {
+                        console.error('Failed to fetch users');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+            
+            function deleteUser(userId) {
+                const url = `http://localhost:8080/api/registrations/${userId}`; // Adjust endpoint if needed
+                fetch(url, { method: 'DELETE' })
+                    .then(response => {
+                        if (response.ok) {
+                            fetchUsers(); // Refresh the list after deletion
+                        } else {
+                            console.error('Failed to delete user');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+            </script>
+          
 </body>
 
 </html>

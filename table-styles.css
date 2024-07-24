@@ -1,0 +1,69 @@
+/*  register user table  */
+.table-div {
+    margin: 20px auto;
+    overflow-x: auto; /* Allows horizontal scrolling on smaller screens */
+    max-width: 100%; /* Ensures the table doesn't exceed the width of its container */
+}
+
+table#userTable {
+    width: 100%;
+    border-collapse: collapse; /* Removes gaps between cells */
+    margin: 0 auto;
+    background-color: #ffffff; /* White background for the table */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow around the table */
+}
+
+table#userTable th, table#userTable td {
+    padding: 12px 15px; /* Adds space within cells */
+    text-align: left; /* Aligns text to the left */
+    border-bottom: 1px solid #ddd; /* Light border between rows */
+}
+
+table#userTable th {
+    background-color: #FEA116;; /* Bootstrap primary color for the header */
+    color: white; /* White text color for the header */
+    font-weight: bold; /* Bold text for the header */
+    text-transform: uppercase; /* Uppercase text for the header */
+}
+
+table#userTable tr:nth-child(even) {
+    background-color: #f2f2f2; /* Alternating row color */
+}
+
+table#userTable tr:hover {
+    background-color: #e9ecef; /* Highlight row on hover */
+}
+
+table#userTable th.sortable:hover {
+    cursor: pointer; /* Changes cursor to pointer for sortable headers */
+    background-color: #FEA116;; /* Darkens header on hover */
+}
+
+.table-div::-webkit-scrollbar {
+    height: 8px; /* Scrollbar height */
+}
+
+.table-div::-webkit-scrollbar-thumb {
+    background-color: #FEA116;; /* Scrollbar thumb color */
+    border-radius: 4px; /* Rounded scrollbar thumb */
+}
+
+.table-div::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Scrollbar track color */
+}
+.delete-btn {
+    background-color: #dc3545; /* Bootstrap danger color */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Darker danger color */
+}
+#fetchUsersBtn{
+    margin-top: 15px;
+}

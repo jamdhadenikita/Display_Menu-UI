@@ -84,10 +84,6 @@ async function addRegistration(event) {
     }
 }
 
-///////////////login front end and backend connection using javascript///////////////
-
-
-
 // ///////////////////// update food menu///////////////////////////////
 
 async function updateMenu(event) {
@@ -104,7 +100,7 @@ async function updateMenu(event) {
     formData.append('price', price);
     formData.append('image', image);
 
-    const url = 'http://localhost:8080/api/addfood/saveFood';
+    const url = 'http://localhost:8080/api//saveFood';
 
     try {
         const response = await fetch(url, {
@@ -142,30 +138,23 @@ document.querySelector("form").addEventListener("submit", updateMenu);
 
 ////////////////// book table js ///////////////////////////
 
-//========================  comment below code by chatgpt   ==========================
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('bookingForm');
-
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Prevent the form from submitting the traditional way
-
-        // Get form values
+document.addEventListener('DOMContentLoaded', function() {
+    async function bookTable(event) {
+        event.preventDefault();   
+        
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
-        const date = document.getElementById('date').value.trim();
-        const time = document.getElementById('time').value.trim();
-        const dateTime = `${date}T${time}`;
+        const date_time = document.getElementById('date_time').value.trim();
+        const numbe_of_people = document.getElementById('numbe_of_people').value.trim();
+        const special_request = document.getElementById('special_request').value.trim();
 
-        // Create JSON data
-        const jsonData = JSON.stringify({
+        const formData = {
             name: name,
             email: email,
-            date_time: dateTime,
-            numbe_of_people: 'Not Specified', // You may want to handle this differently
-            special_request: '' // You may want to handle this differently
-        });
+            date_time: date_time,
+            numbe_of_people: numbe_of_people,
+            special_request: special_request
+        };
 
         const url = 'http://localhost:8080/api/bookTable/book';
 
@@ -175,33 +164,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: jsonData
+                body: JSON.stringify(formData)
             });
 
             if (response.ok) {
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Your table has been booked.',
+                const finalData = await response.json();
+                console.log(finalData);
+                swal.fire({
                     icon: 'success',
-                    confirmButtonText: 'OK'
+                    title: 'Success',
+                    text: 'Table Booked Successfully',
                 });
-                form.reset(); // Reset form fields
             } else {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'There was an error booking your table.',
+                swal.fire({
                     icon: 'error',
-                    confirmButtonText: 'OK'
+                    title: 'Error!',
+                    text: 'Failed to Book Table.',
                 });
             }
         } catch (error) {
-            console.error('Error during fetch:', error);
-            Swal.fire({
-                title: 'Error!',
-                text: 'There was an error booking your table.',
+            console.error("Error:", error);
+            swal.fire({
                 icon: 'error',
-                confirmButtonText: 'OK'
+                title: 'Error!',
+                text: 'An error occurred.',
             });
         }
-    });
+    }
+
+    document.querySelector("#bookTableForm").addEventListener("submit", bookTable);
 });
+
+
+
+

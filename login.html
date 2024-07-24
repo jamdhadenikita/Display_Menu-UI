@@ -9,7 +9,7 @@
 <body>
   <div class="wrapper">
     <h2>Login</h2>
-    <form action="#" autocomplete="off" onsubmit="return validateLoginForm()">
+  <form action="#" autocomplete="off" onsubmit="return validateLoginForm()">
       <div class="input-box">
         <input id="username" type="text" placeholder="Enter your name" required>
       </div>
@@ -20,40 +20,19 @@
       
      <div class="input-box button">
           <input type="submit" value="Login as admin">
-    </div>
+     </div>
 
-    <div class="a1">
-     <h4>Don't have account? <a href="./demo.htm">Register</a></h4>
-    </div>
-
-    </form>
+     <div class="a1">
+      <h4>Don't have account? <a href="./demo.html">Register</a></h4>
+     </div>
+ </form>
 
     <h1 id="reg-response"></h1>
   </div>
 
   <script src="./jquery.js"></script>
-  <script src="./user.js"></script>
+  <scrip src="./user.js"></script>
 
-  <script>
-    function validateLoginForm() {
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-
-        if (username.trim() === "" || password.trim() === "") {
-            alert("All fields are required.");
-            return false;
-        }
-
-        // Additional validation rules can be added here
-
-        loginAdmin();
-        return false; // Prevent form submission for demonstration purposes
-    }
-
-    function loginAdmin() {
-        // Add login functionality here
-        document.getElementById('reg-response').innerText = "Login attempt made.";
-    }
-  </script>
+  
 </body>
 </html>
