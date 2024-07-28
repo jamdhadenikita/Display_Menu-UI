@@ -135,7 +135,6 @@ async function updateMenu(event) {
 
 document.querySelector("form").addEventListener("submit", updateMenu);
 
-
 ////////////////// book table js ///////////////////////////
 
 document.addEventListener('DOMContentLoaded', function() {

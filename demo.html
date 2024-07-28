@@ -17,23 +17,23 @@
                 <span class="title">Personal Details</span>
                 <div class="fields">
                     <div class="input-field">
-                        <label for="fn">First Name</label>
+                        <label for="fn" >First Name<span style="color: red;">*</span></label>
                         <input id="fn" type="text" placeholder="Enter your first name" required pattern="[A-Za-z]+">
                     </div>
                     <div class="input-field">
-                        <label for="ln">Last Name</label>
+                        <label for="ln">Last Name<span style="color: red;">*</span></label>
                         <input id="ln" type="text" placeholder="Enter your last name" required pattern="[A-Za-z]+">
                     </div>
                     <div class="input-field">
-                        <label for="em">Email</label>
+                        <label for="em">Email<span style="color: red;">*</span></label>
                         <input id="em" type="email" placeholder="Enter your email" required>
                     </div>
                     <div class="input-field">
-                        <label for="mb">Mobile Number</label>
+                        <label for="mb">Mobile Number<span style="color: red;">*</span></label>
                         <input id="mb" type="tel" placeholder="Enter mobile number" required pattern="[0-9]{10}">
                     </div>
                     <div class="input-field">
-                        <label for="gen">Gender</label>
+                        <label for="gen">Gender<span style="color: red;">*</span></label>
                         <select id="gen" required>
                             <option value="" disabled selected>Select gender</option>
                             <option value="Male">Male</option>
@@ -42,34 +42,34 @@
                         </select>
                     </div>
                     <div class="input-field">
-                        <label for="dob">Date of Birth</label>
+                        <label for="dob">Date of Birth<span style="color: red;">*</span></label>
                         <input id="dob" type="date" placeholder="Enter birth date" required>
                     </div>
                     <div class="input-field">
-                        <label for="add">Address</label>
+                        <label for="add">Address<span style="color: red;">*</span></label>
                         <input id="add" type="text" placeholder="Enter your address" required>
                     </div>
                     <div class="input-field">
-                        <label for="city">City</label>
+                        <label for="city">City<span style="color: red;">*</span></label>
                         <input id="city" type="text" placeholder="Enter your city name" required>
                     </div>
                     <div class="input-field">
-                        <label for="state">State</label>
+                        <label for="state">State<span style="color: red;">*</span></label>
                         <input id="state" type="text" placeholder="Enter your state" required>
                     </div>
                     <div class="input-field">
-                        <label for="ap">AreaPin</label>
+                        <label for="ap">AreaPin<span style="color: red;">*</span></label>
                         <input id="ap" type="text" placeholder="Enter AreaPin number" required pattern="[0-9]{6}">
                     </div>
                     <div class="input-field">
-                        <label for="pass">Password</label>
+                        <label for="pass">Password<span style="color: red;">*</span></label>
                         <input id="pass" type="password" placeholder="Enter your password" required>
                     </div>
                     <div class="input-field">
-                        <label for="cpass">Confirm Password</label>
+                        <label for="cpass">Confirm Password<span style="color: red;">*</span></label>
                         <input id="cpass" type="password" placeholder="Re-enter your password" required>
                     </div>
-                    <button class="submit" type="submit" onclick="addRegistration();">
+                    <button class="submit" type="submit" onclick="addRegistrat();">
                         <span class="btnText">Submit</span>
                         <i class="uil uil-navigator"></i>
                     </button>

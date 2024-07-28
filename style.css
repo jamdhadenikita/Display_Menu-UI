@@ -656,3 +656,14 @@ button {
 button:hover {
   background-color: #218838;
 }
+
+
+#bar-div{
+  height: 300px;
+  width: 400px;
+}
+
+#pie-div{
+  height: 300px;
+  width: 400px;
+}
