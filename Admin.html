@@ -1,288 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Admin page</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-    <link rel="stylesheet" href="./table-styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+    <link rel="stylesheet" href="./table-styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="img/favicon.ico" rel="icon" />
 
     <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="lib/animate/animate.min.css" rel="stylesheet" />
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link
+      href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
+      rel="stylesheet"
+    />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-</head>
-<body>
+    <link href="css/style.css" rel="stylesheet" />
+    
+  </head>
+  <body>
     <div class="container-xxl bg-white p-0">
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
+      <!-- Spinner Start -->
+      <div
+        id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+      >
+        <div
+          class="spinner-border text-primary"
+          style="width: 3rem; height: 3rem"
+          role="status"
+        >
+          <span class="sr-only">Loading...</span>
         </div>
-        <!-- Spinner End -->
+      </div>
+      <!-- Spinner End -->
 
-        <!-- Navbar & Hero Start -->
-        <div class="container-xxl position-relative p-0">
-            <div id="navback">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
-                    <a href="" class="navbar-brand p-0">
-                        <h1 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>" अन्नपूर्णा "</h1>
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                        <span class="fa fa-bars"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <div class="navbar-nav ms-auto py-0 pe-4">
-                            <p style="margin-right: 8px; margin-top: 33px; color: white;">Admin </p>
-                            <div class="img">
-                                <img src="https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Picture.png" height="50px" width="50px" alt="">
-                            </div>
-                        </div>
-                        <a href="" class="btn btn-primary py-2 px-4">Logout</a>
-                    </div>
-                </nav>
-            </div>
-            <div class="container">
-                <h2 style="margin-top: 2%;">Dashboard</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div style="width: 600px; height: 500px; margin-left:20%; margin-top: 15%;">
-                            <canvas id="barChart"></canvas>
-                            <h4 style="text-align: center; margin-top: 7%;">Monthly User Registrations</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div style="width: 400px; height: 340px; margin-left: 23%; margin-top: 10%;">
-                            <canvas id="pieChart"></canvas>
-                            <h4 style="text-align: center; margin-top: 9%;">Registrations Status</h4>
-                        </div>
-                    </div>
+      <!-- Navbar & Hero Start -->
+      <div class="container-xxl position-relative p-0">
+        <div id="navback">
+          <nav
+            class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0"
+          >
+            <a href="" class="navbar-brand p-0">
+              <h1 class="text-primary m-0">
+                <i class="fa fa-utensils me-3"></i>" अन्नपूर्णा "
+              </h1>
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarCollapse"
+            >
+              <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <div class="navbar-nav ms-auto py-0 pe-4">
+                <p style="margin-right: 8px; margin-top: 33px; color: white">
+                  Admin
+                </p>
+                <div class="img">
+                  <img
+                    src="https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Picture.png"
+                    height="50px"
+                    width="50px"
+                    alt=""
+                  />
                 </div>
+              </div>
+              <a href="./login.html" class="btn btn-primary py-2 px-4">Logout</a>
             </div>
-
-            <div id="user" style="margin-bottom: 0%;">
-                <button style="margin-top: -15%;" class="btn btn-primary py-2 px-4" id="fetchUsersBtn">User's</button>
-            </div>
-
-            <!-- Users list -->
-            <div class="table-div" id="userTableContainer" style="display: none; margin-top: -4%;">
-                <table id="userTable">
-                    <thead>
-                        <h3>List of All Registered Users!</h3>
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Mobile</th>
-                            <th>Gender</th>
-                            <th>Date of Birth</th>
-                            <th>Address</th>
-                            <th>City</th>
-                            <th>Area PIN</th>
-                            <th>State</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Dynamic content will be inserted here -->
-                    </tbody>
-                </table>
-            </div>
+          </nav>
         </div>
-        <!-- Navbar & Hero End -->
+        <div class="container">
+          <h2 style="margin-top: 2%">Dashboard</h2>
+          <div class="row">
+            <div class="col-md-6">
+              <div
+                style="
+                  width: 600px;
+                  height: 500px;
+                  margin-left: 20%;
+                  margin-top: 15%;
+                "
+              >
+                <canvas id="barChart"></canvas>
+                <h4 style="text-align: center; margin-top: 7%">
+                  Monthly User Registrations
+                </h4>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div
+                style="
+                  width: 400px;
+                  height: 340px;
+                  margin-left: 23%;
+                  margin-top: 10%;
+                "
+              >
+                <canvas id="pieChart"></canvas>
+                <h4 style="text-align: center; margin-top: 9%">
+                  Registrations Status
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/wow/wow.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
-        <script src="lib/counterup/counterup.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/tempusdominus/js/moment.min.js"></script>
-        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <div id="user" style="margin-bottom: 0%">
+          <button
+            style="margin-top: -15%"
+            class="btn btn-primary py-2 px-4"
+            id="fetchUsersBtn"
+          >
+            User's
+          </button>
+        </div>
 
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
+        <!-- Users list -->
+        <div
+          class="table-div"
+          id="userTableContainer"
+          style="display: none; margin-top: -4%"
+        >
+          <table id="userTable">
+            <thead>
+              <h3>List of All Registered Users!</h3>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Gender</th>
+                <th>Date of Birth</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Area PIN</th>
+                <th>State</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dynamic content will be inserted here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Navbar & Hero End -->
 
-        <!-- Chart.js -->
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <!-- JavaScript Libraries -->
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="lib/wow/wow.min.js"></script>
+      <script src="lib/easing/easing.min.js"></script>
+      <script src="lib/waypoints/waypoints.min.js"></script>
+      <script src="lib/counterup/counterup.min.js"></script>
+      <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+      <script src="lib/tempusdominus/js/moment.min.js"></script>
+      <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+      <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-        <!-- Custom JavaScript -->
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Sample data for charts
-                const monthlyUsers = {
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                    data: [50, 30, 70, 40, 60, 80, 100] // Sample data
-                };
+      <!-- Template Javascript -->
+      <script src="js/main.js"></script>
 
-                const userActivity = {
-                    newUsers: 200,
-                    oldUsers: 300
-                };
+      <!-- Chart.js -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-                // Bar Chart for Monthly User Registrations
-                const barCtx = document.getElementById('barChart').getContext('2d');
-                new Chart(barCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: monthlyUsers.labels,
-                        datasets: [{
-                            label: 'User Registrations',
-                            data: monthlyUsers.data,
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
+      <!-- Custom JavaScript -->
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    // Sample data for charts
+    const monthlyUsers = {
+      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      data: [50, 30, 70, 40, 60, 80, 100], // Sample data
+    };
 
-                // Pie Chart for User Activity
-                const pieCtx = document.getElementById('pieChart').getContext('2d');
-                new Chart(pieCtx, {
-                    type: 'pie',
-                    data: {
-                        labels: ['New Users', 'Old Users'],
-                        datasets: [{
-                            data: [userActivity.newUsers, userActivity.oldUsers],
-                            backgroundColor: ['#FF6384', '#36A2EB'],
-                            hoverBackgroundColor: ['#FF6384', '#36A2EB']
-                        }]
-                    }
-                });
+    const userActivity = {
+      newUsers: 200,
+      oldUsers: 300,
+    };
 
-                // Event listener for fetching users
-                document.getElementById('fetchUsersBtn').addEventListener('click', function(event) {
-                    event.preventDefault();
-                    fetchUsers();
-                });
-            });
-
-            async function fetchUsers() {
-                const url = 'http://localhost:8080/api/registrations/getallregisteruser'; // Update this if needed
-
-                try {
-                    const response = await fetch(url, { method: 'GET' });
-                    if (response.ok) {
-                        const users = await response.json();
-                        const tbody = document.querySelector('#userTable tbody');
-                        tbody.innerHTML = '';
-
-                        users.forEach(user => {
-                            const row = document.createElement('tr');
-                            row.innerHTML = `
-                                <td>${user.firstName}</td>
-                                <td>${user.lastName}</td>
-                                <td>${user.email}</td>
-                                <td>${user.mobile}</td>
-                                <td>${user.gender}</td>
-                                <td>${user.dateOfBirth}</td>
-                                <td>${user.address}</td>
-                                <td>${user.city}</td>
-                                <td>${user.areaPIN}</td>
-                                <td>${user.state}</td>
-                                <td>
-                                    <button class="delete-btn" onclick="deleteUser('${user.id}')">Delete</button>
-                                </td>
-                            `;
-                            tbody.appendChild(row);
-                        });
-
-                        // Display the user table after fetching users
-                        document.getElementById('userTableContainer').style.display = 'block';
-                    } else {
-                        console.error('Failed to fetch users');
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                }
-            }
-            async function deleteUser(userId) {
-    // Show a confirmation dialog to the user
-    const result = await Swal.fire({
-        title: 'Are you sure?',
-        text: 'Do you really want to delete this user? This action cannot be undone.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'Cancel',
-        reverseButtons: true
+    // Bar Chart for Monthly User Registrations
+    const barCtx = document.getElementById("barChart").getContext("2d");
+    new Chart(barCtx, {
+      type: "bar",
+      data: {
+        labels: monthlyUsers.labels,
+        datasets: [
+          {
+            label: "User Registrations",
+            data: monthlyUsers.data,
+            backgroundColor: "rgba(54, 162, 235, 0.2)",
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
     });
 
-    // If the user clicked 'Yes, delete it!', proceed with deletion
-    if (result.isConfirmed) {
-        const url = `http://localhost:8080/api/registrations/${userId}`;
+    // Pie Chart for User Activity
+    const pieCtx = document.getElementById("pieChart").getContext("2d");
+    new Chart(pieCtx, {
+      type: "pie",
+      data: {
+        labels: ["New Users", "Old Users"],
+        datasets: [
+          {
+            data: [userActivity.newUsers, userActivity.oldUsers],
+            backgroundColor: ["#FF6384", "#36A2EB"],
+            hoverBackgroundColor: ["#FF6384", "#36A2EB"],
+          },
+        ],
+      },
+    });
 
-        fetch(url, { method: 'DELETE' })
-            .then(async response => {
-                if (response.ok) {
-                    // Show success alert
-                    await Swal.fire({
-                        icon: 'success',
-                        title: 'Deleted!',
-                        text: 'The user has been deleted successfully.',
-                        confirmButtonText: 'OK'
-                    });
-                    fetchUsers(); // Refresh the list after deletion
-                } else {
-                    // Show error alert
-                    await Swal.fire({
-                        icon: 'error',
-                        title: 'Failed',
-                        text: 'Failed to delete the user.',
-                        confirmButtonText: 'OK'
-                    });
-                }
-            })
-            .catch(async error => {
-                console.error('Error:', error);
-                // Show error alert
-                await Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'An error occurred while trying to delete the user.',
-                    confirmButtonText: 'OK'
-                });
-            });
-    } else {
-        // If the user clicked 'Cancel', do nothing
-        console.log('User deletion canceled.');
+    // Event listener for fetching users
+    document.getElementById("fetchUsersBtn").addEventListener("click", function (event) {
+      event.preventDefault();
+      const userTableContainer = document.getElementById("userTableContainer");
+
+      if (userTableContainer.style.display === "none" || userTableContainer.style.display === "") {
+        fetchUsers();
+        userTableContainer.style.display = "block";
+      } else {
+        userTableContainer.style.display = "none";
+      }
+    });
+  });
+
+  async function fetchUsers() {
+    const url = "http://localhost:8080/api/registrations/getallregisteruser"; // Update this if needed
+
+    try {
+      const response = await fetch(url, { method: "GET" });
+      if (response.ok) {
+        const users = await response.json();
+        const tbody = document.querySelector("#userTable tbody");
+        tbody.innerHTML = "";
+
+        users.forEach((user) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+              <td>${user.firstName}</td>
+              <td>${user.lastName}</td>
+              <td>${user.email}</td>
+              <td>${user.mobile}</td>
+              <td>${user.gender}</td>
+              <td>${user.dateOfBirth}</td>
+              <td>${user.address}</td>
+              <td>${user.city}</td>
+              <td>${user.areaPIN}</td>
+              <td>${user.state}</td>
+              <td>
+                  <button class="delete-btn" onclick="deleteUser('${user.id}')">Delete</button>
+              </td>
+          `;
+          tbody.appendChild(row);
+        });
+      } else {
+        console.error("Failed to fetch users");
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
-}
+  }
 
-        
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js" nonce="12345"></script>
+  async function deleteUser(userId) {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to delete this user? This action cannot be undone.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+      reverseButtons: true,
+    });
+
+    if (result.isConfirmed) {
+      const url = `http://localhost:8080/api/registrations/${userId}`;
+
+      try {
+        const response = await fetch(url, { method: "DELETE" });
+        if (response.ok) {
+          await Swal.fire({
+            icon: "success",
+            title: "Deleted!",
+            text: "The user has been deleted successfully.",
+            confirmButtonText: "OK",
+          });
+          fetchUsers();
+        } else {
+          await Swal.fire({
+            icon: "error",
+            title: "Failed",
+            text: "Failed to delete the user.",
+            confirmButtonText: "OK",
+          });
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        await Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "An error occurred while trying to delete the user.",
+          confirmButtonText: "OK",
+        });
+      }
+    } else {
+      console.log("User deletion canceled.");
+    }
+  }
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"nonce="12345"></script>
     </div>
-</body>
+  </body>
 </html>

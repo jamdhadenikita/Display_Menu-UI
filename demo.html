@@ -8,6 +8,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="demo.css">
     <title>Registration Form</title>
+    <style>
+        .input-field {
+            position: relative;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            margin-top: 20px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 15px;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -64,20 +78,39 @@
                     <div class="input-field">
                         <label for="pass">Password<span style="color: red;">*</span></label>
                         <input id="pass" type="password" placeholder="Enter your password" required>
+                        <span class="toggle-password">👁️</span>
                     </div>
                     <div class="input-field">
                         <label for="cpass">Confirm Password<span style="color: red;">*</span></label>
                         <input id="cpass" type="password" placeholder="Re-enter your password" required>
+                        <span class="toggle-password">👁️</span>
                     </div>
                     <button class="submit" type="submit" onclick="addRegistrat();">
                         <span class="btnText">Submit</span>
                         <i class="uil uil-navigator"></i>
                     </button>
+                    <div class="a1">
+                        <h4>Have an account? <a href="./login.html">Log in</a></h4>
+                    </div>
                 </div>
             </div>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js" nonce="12345"></script>
     <script src="user.js" defer nonce="12345"></script>
+    <script nonce="12345">
+        document.querySelectorAll('.toggle-password').forEach(item => {
+            item.addEventListener('click', function() {
+                const passwordField = this.previousElementSibling;
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    this.textContent = 'Hide'; // Change icon to a closed eye when password is visible
+                } else {
+                    passwordField.type = 'password';
+                    this.textContent = '👁️'; // Change icon back to open eye when password is hidden
+                }
+            });
+        });
+    </script>
 </body>
 </html> 
