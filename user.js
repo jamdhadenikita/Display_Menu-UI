@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function addRegistration(event) {
-    event.preventDefault();              // Prevent the form from submitting the traditional way
+    event.preventDefault();             
 
     const firstName = document.getElementById("fn").value.trim();
     const lastName = document.getElementById("ln").value.trim();
@@ -21,7 +21,6 @@ async function addRegistration(event) {
     const password = document.getElementById("pass").value.trim();
     const confirmPassword = document.getElementById("cpass").value.trim();
 
-    // Client-side validation
     if (!firstName || !lastName || !email || !mobile || !gender || !dateOfBirth || !address || !city || !state || !areaPIN || !password || !confirmPassword) {
         alert("All fields are required.");
         return;
@@ -50,7 +49,7 @@ async function addRegistration(event) {
     const url = "http://localhost:8080/api/registrations/saveInfo";
     
     try {
-        console.log("Sending data:", userData);  // Log the data being sent
+        console.log("Sending data:", userData);  
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -64,9 +63,8 @@ async function addRegistration(event) {
         }
 
         const finalData = await response.json();
-        console.log("Received response:", finalData);  // Log the response
+        console.log("Received response:", finalData);  
 
-        // Show success alert
         await Swal.fire({
             icon: 'success',
             title: 'Registration Successful',
@@ -100,7 +98,7 @@ async function updateMenu(event) {
     formData.append('price', price);
     formData.append('image', image);
 
-    const url = 'http://localhost:8080/api//saveFood';
+    const url = 'http://localhost:8080/api/addfood/saveFood';
 
     try {
         const response = await fetch(url, {
@@ -193,6 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelector("#bookTableForm").addEventListener("submit", bookTable);
 });
+
 
 ////////////////////login/////////////
 

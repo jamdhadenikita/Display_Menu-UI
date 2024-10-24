@@ -317,7 +317,7 @@
     });
 
     if (result.isConfirmed) {
-      const url = `http://localhost:8080/api/registrations/${userId}`;
+      const url = `http://localhost:8080/api/registrations/delete/${userId}`;
 
       try {
         const response = await fetch(url, { method: "DELETE" });
