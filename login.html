@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-      .input-box {
-    position: relative;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .input-box {
+      position: relative;
+    }
 
-.input-box .toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #007BFF;
-    font-size: 14px;
-    padding: 0;
-}
-
-
-    </style>
+    .input-box .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #007bff;
+      font-size: 14px;
+      padding: 0;
+    }
+  </style>
 </head>
+
 <body>
   <div class="wrapper">
     <h2>Login</h2>
-    <form action="/login" method="post" autocomplete="off">
+    <form id="loginForm" autocomplete="off">
       <div class="input-box">
-        <input id="username" name="username" type="text" placeholder="Enter your name" required>
+        <input id="username" name="username" type="text" placeholder="Enter Your Username or Email" required />
       </div>
 
       <div class="input-box">
-        <input id="password" name="password" type="password" placeholder="Your password" required>
+        <input id="password" name="password" type="password" placeholder="Your Password" required />
         <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">Show</button>
       </div>
-      
+
       <div class="input-box button">
-        <input type="submit" value="Login">
+        <button type="submit">Login</button>
       </div>
 
       <div class="a1">
@@ -55,19 +55,19 @@
   <script src="./user.js"></script>
   <script>
     function togglePasswordVisibility() {
-    const passwordInput = document.getElementById("password");
-    const toggleButton = document.querySelector(".toggle-password");
-    
-    if (passwordInput.type === "password") {
+      const passwordInput = document.getElementById("password");
+      const toggleButton = document.querySelector(".toggle-password");
+
+      if (passwordInput.type === "password") {
         passwordInput.type = "text";
         toggleButton.textContent = "Hide";
-    } else {
+      } else {
         passwordInput.type = "password";
         toggleButton.textContent = "Show";
+      }
     }
-}
-
   </script>
 
 </body>
+
 </html>

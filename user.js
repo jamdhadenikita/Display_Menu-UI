@@ -82,11 +82,118 @@ async function addRegistration(event) {
     }
 }
 
+
+////////////////////login/////////////
+
+document.addEventListener("DOMContentLoaded", function () {
+    const loginForm = document.getElementById("loginForm");
+  
+    // Ensure the form exists before attaching an event listener
+    if (!loginForm) {
+      console.error("Login form not found in the DOM.");
+      return;
+    }
+  
+    loginForm.addEventListener("submit", async function (event) {
+      event.preventDefault(); // Prevent form from submitting via the browser
+  
+      const usernameInput = document.getElementById("username");
+      const passwordInput = document.getElementById("password");
+  
+      if (!usernameInput || !passwordInput) {
+        console.error("Username or password input fields not found.");
+        alert("An error occurred. Please try again.");
+        return;
+      }
+  
+      const userName = usernameInput.value.trim();
+      const password = passwordInput.value.trim();
+  
+      // Admin credentials (for local validation)
+      const adminUser = "admin";
+      const adminPass = "adminPass";
+  
+      try {
+        const response = await fetch(`http://localhost:8080/api/registrations/login?email=${encodeURIComponent(userName)}&password=${encodeURIComponent(password)}`, {
+          method: "GET", // Ensure the backend is set up for POST
+          headers: {
+            "Content-Type": "application/json",
+          },
+        //   body: JSON.stringify({email, password }),
+        });
+  
+        const result = await response.json();
+        console.log("respose, ",result);
+  
+        // Local admin check
+        if (userName === adminUser && password === adminPass) {
+          window.location.href = "/lib/DashA.html";
+        } else if (response.ok) {
+          window.location.href = "/index.html";
+        } else {
+          alert("Invalid username or password!");
+        }
+      } catch (error) {
+        console.error("Error during login:", error);
+        alert("An error occurred while logging in. Please try again later.");
+      }
+    });
+  });
+  
+
 // ///////////////////// update food menu///////////////////////////////
 
-async function updateMenu(event) {
-    event.preventDefault();                       // Prevent the form from submitting the traditional way
+// async function updateMenu(event) {
+//     event.preventDefault();                      
+//     const title = document.getElementById("foodTitle").value.trim();
+//     const description = document.getElementById("foodDescription").value.trim();
+//     const price = document.getElementById("foodPrice").value.trim();
+//     const image = document.getElementById("foodImage").files[0];
 
+//     const formData = new FormData();
+//     formData.append('title', title);
+//     formData.append('description', description);
+//     formData.append('price', price);
+//     formData.append('image', image);
+
+//     const url = 'http://localhost:8080/api/addfood/saveFood';
+
+//     try {
+//         const response = await fetch(url, {
+//             method: 'POST',
+//             body: formData
+//         });
+
+//         if (response.ok) {
+//             const finalData = await response.json();
+//             console.log(finalData);
+//             Swal.fire({
+//                 icon: 'success',
+//                 title: 'Success!',
+//                 text: 'Food added successfully!',
+//             });
+//         } else {
+//             Swal.fire({
+//                 icon: 'error',
+//                 title: 'Error!',
+//                 text: 'Failed to add food.',
+//             });
+//         }
+//     } catch (error) {
+//         console.error("Error:", error);
+//         Swal.fire({
+//             icon: 'error',
+//             title: 'Error!',
+//             text: 'An error occurred.',
+//         });
+//     }
+// }
+
+// document.querySelector("form").addEventListener("submit", updateMenu);
+
+
+async function updateMenu(event) {
+    event.preventDefault();                      
     const title = document.getElementById("foodTitle").value.trim();
     const description = document.getElementById("foodDescription").value.trim();
     const price = document.getElementById("foodPrice").value.trim();
@@ -133,7 +240,9 @@ async function updateMenu(event) {
 
 document.querySelector("form").addEventListener("submit", updateMenu);
 
-////////////////// book table js ///////////////////////////
+
+
+// ////////////////// book table js ///////////////////////////
 
 document.addEventListener('DOMContentLoaded', function() {
     async function bookTable(event) {
@@ -191,41 +300,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelector("#bookTableForm").addEventListener("submit", bookTable);
 });
-
-
-////////////////////login/////////////
-
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("loginForm").addEventListener("submit", async function (event) {
-      event.preventDefault();
-  
-      const userName = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-  
-      try {
-        const response = await fetch("http://localhost:8080/api/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ userName, password })
-        });
-  
-        const result = await response.text();
-  
-        if (result === "admin") {
-          window.location.href = "/admin.html"; // Redirect to admin page
-        } else {
-          alert("Invalid username or password!");
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        alert("An error occurred during login. Please try again.");
-      }
-    });
-  });
-  
-
 
 
 
